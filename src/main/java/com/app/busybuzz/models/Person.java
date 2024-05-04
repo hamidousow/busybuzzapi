@@ -13,6 +13,8 @@ public class Person {
 
     @Id
     @Column(name = "per_id")
+    @SequenceGenerator(name = "person_id_seq_gen", sequenceName = "person_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_id_seq_gen")
     private Integer Id;
 
     @Column(name = "per_name")
@@ -27,9 +29,14 @@ public class Person {
     @Column(name = "per_role")
     private String role;
 
+    public Person() {
+
+    }
+
     public Person(String name, String lastName, String mail) {
         this.name = name;
         this.lastName = lastName;
         this.mail = mail;
     }
+
 }
