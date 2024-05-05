@@ -41,4 +41,13 @@ public class OwnerServiceIMP implements IOwnerService {
     public void delete(Owner owner) {
         ownerRepository.delete(owner);
     }
+
+    @Override
+    public Optional<Owner> findOneByMail(String email) {
+        Optional<Owner> result = ownerRepository.findOneByMail(email);
+        if(result.isEmpty()) {
+            return null;
+        }
+        return result;
+    }
 }

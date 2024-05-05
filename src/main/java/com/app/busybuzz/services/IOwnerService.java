@@ -17,4 +17,5 @@ public interface IOwnerService {
 
     void delete(Owner owner);
 
+    Optional<Owner> findOneByMail(String email);
 }
