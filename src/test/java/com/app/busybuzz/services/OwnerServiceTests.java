@@ -1,7 +1,6 @@
-package com.app.busybuzz;
+package com.app.busybuzz.services;
 
 import com.app.busybuzz.models.Owner;
-import com.app.busybuzz.services.IOwnerService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

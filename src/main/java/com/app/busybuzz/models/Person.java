@@ -3,9 +3,7 @@ package com.app.busybuzz.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "t_person")
