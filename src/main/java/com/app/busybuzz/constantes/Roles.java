@@ -8,6 +8,8 @@ public final class Roles {
     }
 
     public static final String OWNER = "owner";
+
+    public static final String EMPLOYEE = "employee";
     public static final String CLIENT = "client";
 
 
