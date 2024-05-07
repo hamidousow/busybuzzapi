@@ -27,6 +27,9 @@ public class Person {
     @Column(name = "per_role")
     private String role;
 
+    @Column(name = "per_position")
+    private String position;
+
     public Person() {
 
     }

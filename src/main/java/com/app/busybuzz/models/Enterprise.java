@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -17,7 +19,7 @@ public class Enterprise {
 
     @Id
     @Column(name = "ent_id")
-    @SequenceGenerator(name = "enterprise_id_seq_gen", sequenceName = "enterprise_id_seq")
+    @SequenceGenerator(name = "enterprise_id_seq_gen", sequenceName = "enterprise_id_seq", allocationSize = 10)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "enterprise_id_seq_gen")
     private Integer id;
 
@@ -39,6 +41,9 @@ public class Enterprise {
     @ManyToOne(targetEntity = Owner.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "per_id")
     private Owner owner;
+
+    @OneToMany(mappedBy = "enterprise", fetch = FetchType.LAZY)
+    List<Employee> employees;
 
 
 
