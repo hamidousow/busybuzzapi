@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -44,6 +43,9 @@ public class Enterprise {
 
     @OneToMany(mappedBy = "enterprise", fetch = FetchType.LAZY)
     List<Employee> employees;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "enterprise", cascade = CascadeType.REMOVE)
+    List<Address> address;
 
 
 

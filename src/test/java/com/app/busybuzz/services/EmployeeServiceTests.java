@@ -2,7 +2,7 @@ package com.app.busybuzz.services;
 
 import com.app.busybuzz.constantes.Roles;
 import com.app.busybuzz.models.Employee;
-import com.app.busybuzz.models.Owner;
+
 import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
