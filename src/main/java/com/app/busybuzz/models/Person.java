@@ -35,6 +35,13 @@ public class Person {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.REMOVE)
     List<Comment> comment;
 
+    @ManyToMany
+    @JoinTable(
+            name = "t_asso_person_skill",
+            joinColumns = @JoinColumn(name = "skil_id"),
+            inverseJoinColumns = @JoinColumn(name = "per_id"))
+    List<Skill> skills;
+
     public Person() {
 
     }
