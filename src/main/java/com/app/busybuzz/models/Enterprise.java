@@ -47,6 +47,9 @@ public class Enterprise {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "enterprise", cascade = CascadeType.REMOVE)
     List<Address> address;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "enterprise", cascade = CascadeType.REMOVE)
+    List<Comment> comment;
+
 
 
 }

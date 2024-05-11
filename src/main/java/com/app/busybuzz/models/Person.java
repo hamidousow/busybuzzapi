@@ -3,6 +3,8 @@ package com.app.busybuzz.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -29,6 +31,9 @@ public class Person {
 
     @Column(name = "per_position")
     private String position;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.REMOVE)
+    List<Comment> comment;
 
     public Person() {
 
