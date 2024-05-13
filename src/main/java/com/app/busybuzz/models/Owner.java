@@ -1,6 +1,7 @@
 package com.app.busybuzz.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 

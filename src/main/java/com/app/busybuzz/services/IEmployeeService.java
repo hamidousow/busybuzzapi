@@ -11,32 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class IEmployeeService {
+public interface IEmployeeService {
 
-    @Autowired
-    EmployeeRepository employeeRepository;
+    void create(Employee employee);
 
-    public void create(Employee employee) {
-        employeeRepository.save(employee);
-    }
+    Optional<Employee> findOneById(Integer id);
 
-    public Optional<Employee> findOneById(Integer id) {
-        return employeeRepository.findById(id);
-    }
+    void update(Employee employee);
 
-    public void update(Employee employee) {
-        employeeRepository.save(employee);
-    }
+    Optional<Employee> findOneByMail(String mail);
 
-    public Optional<Employee> findOneByMail(String mail) {
-        return employeeRepository.findByMail(mail);
-    }
+    List<Employee> findAll();
 
-    public List<Employee> findAll() {
-        return (List<Employee>) employeeRepository.findAll();
-    }
-
-    public void delete(Employee employee) {
-        employeeRepository.delete(employee);
-    }
+    void delete(Employee employee);
 }

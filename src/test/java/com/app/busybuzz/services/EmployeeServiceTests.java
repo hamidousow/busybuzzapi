@@ -2,7 +2,7 @@ package com.app.busybuzz.services;
 
 import com.app.busybuzz.constantes.Roles;
 import com.app.busybuzz.models.Employee;
-import com.app.busybuzz.models.Owner;
+
 import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
@@ -29,7 +28,7 @@ public class EmployeeServiceTests {
     @Test
     @Order(1)
     public void shouldCreateNewEmployee() {
-        Employee employee = new Employee("emp", "first", "employee1@createmethod.com");
+        Employee employee = new Employee("emp", "first", "employee2@createmethod.com");
         employee.setRole(Roles.EMPLOYEE);
 
         employee.setEnterprise(enterpriseService.findOneById(301).get());
