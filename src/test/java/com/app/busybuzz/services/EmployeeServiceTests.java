@@ -28,7 +28,7 @@ public class EmployeeServiceTests {
     @Test
     @Order(1)
     public void shouldCreateNewEmployee() {
-        Employee employee = new Employee("emp", "first", "employee2@createmethod.com");
+        Employee employee = new Employee("emp", "first", "employee3@createmethod.com");
         employee.setRole(Roles.EMPLOYEE);
 
         employee.setEnterprise(enterpriseService.findOneById(301).get());

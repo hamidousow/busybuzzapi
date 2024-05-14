@@ -8,6 +8,10 @@ import java.util.List;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(
+        discriminatorType = DiscriminatorType.STRING,
+        name = "per_role"
+)
 @Table(name = "t_person")
 public class Person {
 
@@ -26,7 +30,7 @@ public class Person {
     @Column(name = "per_mail")
     private String mail;
 
-    @Column(name = "per_role")
+    @Column(name = "per_role", insertable=false, updatable=false)
     private String role;
 
     @Column(name = "per_position")

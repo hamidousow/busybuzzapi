@@ -1,5 +1,6 @@
 package com.app.busybuzz.services;
 
+import com.app.busybuzz.constantes.Roles;
 import com.app.busybuzz.models.Owner;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -23,7 +24,8 @@ public class OwnerServiceTests {
     @Test
     @Order(1)
     public void shouldCreateUserWithRoleOwner() {
-        Owner owner = new Owner("test", "create", "test5@createmethod.com");
+        Owner owner = new Owner("test", "create", "test6@createmethod.com");
+        owner.setRole(Roles.OWNER);
         ownerService.create(owner);
         Optional<Owner> result = ownerService.findOneById(owner.getId());
         assertNotNull(result);

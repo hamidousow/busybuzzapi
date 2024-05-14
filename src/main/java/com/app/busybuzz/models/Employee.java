@@ -1,12 +1,12 @@
 package com.app.busybuzz.models;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
 @Table(name = "t_employee")
+@DiscriminatorValue("employee")
 public class Employee extends Person {
 
     @ManyToOne(targetEntity = Enterprise.class, fetch = FetchType.LAZY)

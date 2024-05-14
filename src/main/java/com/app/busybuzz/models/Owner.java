@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_owner")
+@DiscriminatorValue("owner")
 public class Owner extends Person {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.REMOVE)
