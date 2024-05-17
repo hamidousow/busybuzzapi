@@ -23,10 +23,10 @@ public class AddressServiceTests {
     public void shouldCreateAddress() {
         Optional<Enterprise> enterprise = enterpriseService.findOneById(301);
         Address address = new Address();
-        address.setNumber("48");
+        address.setNumber("8");
         address.setStreetName("rue du test adress");
-        address.setCity("Lille");
-        address.setPostalCode("5000");
+        address.setCity("Croix");
+        address.setZipCode("59000");
         address.setEnterprise(enterprise.get());
 
         addressService.create(address);

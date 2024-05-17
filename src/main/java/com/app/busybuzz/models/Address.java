@@ -22,16 +22,21 @@ public class Address {
 
     @Column(name = "addr_street_name")
     private String streetName;
+
     @Column(name = "addr_city")
     private String city;
-    @Column(name = "addr_postal_code")
-    private String postalCode;
+
+    @Column(name = "addr_zip_code")
+    private String zipCode;
+
     @Column(name = "addr_optional_info")
     private String optionalInfo;
 
-    @ManyToOne(targetEntity = Enterprise.class)
-    @JoinColumn(name = "ent_id")
+    @OneToOne(mappedBy = "address")
     private Enterprise enterprise;
+
+    @OneToOne(mappedBy = "address")
+    private Establishment establishment;
 
 
 }

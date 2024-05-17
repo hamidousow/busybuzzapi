@@ -1,35 +1,40 @@
 package com.app.busybuzz.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import lombok.Data;
 
+@Entity
 @Data
+@Table(name = "t_establishment")
 public class Establishment {
 
-    @JsonProperty("adresse")
-    private String address;
+    @Id
+    @Column(name = "est_id")
+    @SequenceGenerator(name = "establishment_id_seq_gen", sequenceName = "establishment_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "establishment_id_seq_gen")
+    private Integer id;
 
-    @JsonProperty("activite_principale")
+    @Column(name = "est_main_activity")
     private String mainActivity;
 
-    @JsonProperty("code_postal")
-    private String zipCode;
-
-    @JsonProperty("date_creation")
+    @Column(name = "est_date_created")
     private String dateCreated;
 
-    @JsonProperty("date_debut_activite")
+    @Column(name = "est_date_activity_started")
     private String dateActivityStarted;
 
-    @JsonProperty("date_fermeture")
+    @Column(name = "est_date_closed")
     private String dateClosed;
 
-    @JsonProperty("libelle_commune")
-    private String city;
-
-    private String latitude;
-
-    private String longitude;
-
+    @Column(name = "est_siret")
     private String siret;
+
+    @OneToOne
+    @JoinColumn(name = "addr_id", referencedColumnName = "addr_id")
+    private Address address;
+
+    @ManyToOne
+    @JoinColumn(name="ent_id")
+    private Enterprise enterprise;
 }

@@ -11,7 +11,12 @@ import java.util.List;
 @DiscriminatorValue("owner")
 public class Owner extends Person {
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.REMOVE)
+    @ManyToMany
+    @JoinTable(
+            name = "t_asso_enterprise_owner",
+            joinColumns = @JoinColumn(name = "per_id"),
+            inverseJoinColumns = @JoinColumn(name = "ent_id")
+    )
     private List<Enterprise> enterprises;
 
     public Owner() { }
@@ -19,6 +24,12 @@ public class Owner extends Person {
     public Owner(String name, String lastName, String mail) {
         super(name, lastName, mail);
     }
+
+    public void addEnterprise(Enterprise enterprise) {
+        this.enterprises.add(enterprise);
+    }
+
+
 
 
 }
