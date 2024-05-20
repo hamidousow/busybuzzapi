@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service
 public class ClientServiceIMP implements IClientService {
 
-    @Autowired
+
     ClientRepository clientRepository;
+
+    public ClientServiceIMP(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
     @Override
     public Optional<Client> findOneById(Integer id) {
         return clientRepository.findById(id);
