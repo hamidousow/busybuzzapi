@@ -71,10 +71,9 @@ public class EmployeeServiceTests {
     @Test
     @Order(5)
     public void testSearchEmployeeByEmail_shouldReturnOneUser() {
-        Optional<Employee> result = employeeService.findOneByMail("employee1@createmethod.com");
+        Optional<Employee> result = employeeService.findOneByMail("employee2@createmethod.com");
         assertNotNull(result.get());
-        assertEquals("employee1@createmethod.com", result.get().getMail());
-
+        assertEquals("employee2@createmethod.com", result.get().getMail());
     }
 
     @Test

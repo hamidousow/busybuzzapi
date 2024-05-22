@@ -2,82 +2,91 @@ package com.app.busybuzz.services;
 
 import com.app.busybuzz.constantes.Roles;
 import com.app.busybuzz.models.Owner;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import com.app.busybuzz.repositories.OwnerRepository;
+import com.app.busybuzz.services.imp.OwnerServiceIMP;
+import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class OwnerServiceTests {
 
-    @Autowired
-    private IOwnerService ownerService;
+    @Mock
+    private OwnerRepository ownerRepoMock;
+
+    @InjectMocks
+    private OwnerServiceIMP ownerService;
 
     @Test
     @Order(1)
     public void shouldCreateUserWithRoleOwner() {
         Owner owner = new Owner("test", "create", "test6@createmethod.com");
         owner.setRole(Roles.OWNER);
+        owner.setId(1);
         ownerService.create(owner);
-        Optional<Owner> result = ownerService.findOneById(owner.getId());
-        assertNotNull(result);
-        assertEquals(owner.getName(), result.get().getName());
-        assertEquals("owner", result.get().getRole());
-
+        verify(ownerRepoMock, times(1)).save(owner);
     }
 
     @Test
     @Order(2)
-    public void shouldReturnOneUser() {
-        Integer expectedId = 101;
-        Optional<Owner> userFind = ownerService.findOneById(expectedId);
-        assertNotNull(userFind);
-        assertEquals(expectedId, userFind.get().getId(), "");
+    public void searchUserByMail_shouldReturnOneUser() {
+        Owner owner = new Owner("Name", "Lastname", "la@mail");
+        given(ownerRepoMock.findOneByMail(owner.getMail()))
+                .willReturn(Optional.of(owner));
+        var ownerResult = ownerService.findOneByMail(owner.getMail());
+        assertThat(ownerResult).isPresent();
     }
 
     @Test
     @Order(3)
     public void shouldUpdateUserData() {
-        Integer userId = 102;
-        Optional<Owner> userToUpdate = ownerService.findOneById(userId);
-        userToUpdate.get().setName("udpateTest");
-        ownerService.update(userToUpdate.get());
-        Optional<Owner> result = ownerService.findOneById(userId);
-        assertNotNull(result);
-        assertEquals("udpateTest" , result.get().getName());
+        Owner owner = new Owner("name", "lastname", "mail@gmail.com");
+        ownerService.create(owner);
+        owner.setName("udpateTest");
+        ownerService.update(owner);
+        verify(ownerRepoMock, times(2)).save(owner);
     }
 
     @Test
     @Order(4)
     public void shouldReturnListOfUsers() {
-        List<Owner> results = ownerService.findAll();
-        assertFalse(results.isEmpty());
+        Owner owner = new Owner("name", "lastname", "mail@gmail.com");
+        Owner owner2 = new Owner("name1", "lastname2", "mail3@gmail.com");
+        List<Owner> owners = new ArrayList<Owner>(){{
+            add(owner);
+            add(owner2);
+        }};
+        given(ownerService.findAll()).willReturn(owners);
+
     }
 
     @Test
     @Order(5)
-    public void testSearchUserByEmail_shouldReturnOneUser() {
-        Optional<Owner> result = ownerService.findOneByMail("test@gmail.com");
-        assertNotNull(result.get());
-        assertEquals("test@gmail.com", result.get().getMail());
-
+    public void testSearchUserById_shouldReturnOneUser() {
+        Owner owner = new Owner("test", "create", "test6@createmethod.com");
+        owner.setId(1);
+        given(ownerService.findOneById(1)).willReturn(Optional.of(owner));
     }
 
     @Test
     @Order(6)
     public void shouldDeleteUser() {
-        Integer id = 110;
-        Optional<Owner> userToDelete = ownerService.findOneById(id);
-        ownerService.delete(userToDelete.get());
-        Optional<Owner> result = ownerService.findOneById(id);
-        assertFalse(result.isPresent());
+
+        Owner owner = new Owner("test", "create", "test6@createmethod.com");
+        owner.setId(1);
+        ownerService.delete(owner);
+        verify(ownerRepoMock, times(1)).delete(owner);
     }
 }

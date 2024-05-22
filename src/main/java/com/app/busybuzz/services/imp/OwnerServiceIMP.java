@@ -13,6 +13,7 @@ public class OwnerServiceIMP implements IOwnerService {
 
     private OwnerRepository ownerRepository;
 
+
     public OwnerServiceIMP(OwnerRepository ownerRepository) {
         this.ownerRepository = ownerRepository;
     }

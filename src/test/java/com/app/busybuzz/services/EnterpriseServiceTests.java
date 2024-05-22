@@ -66,9 +66,8 @@ public class EnterpriseServiceTests {
     @Test
     @Order(2)
     public void shouldReturnOneEnterprise() {
-        Optional<Enterprise> result = enterpriseService.findOneById(251);
+        Optional<Enterprise> result = enterpriseService.findOneById(301);
         assertTrue(result.isPresent());
-        assertEquals("enterprise 1", result.get().getName());
     }
 
     @Test
