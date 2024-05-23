@@ -36,10 +36,10 @@ public class Person {
     @Column(name = "per_position")
     private String position;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "person", cascade = CascadeType.REMOVE)
     List<Comment> comment;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "t_asso_person_skill",
             joinColumns = @JoinColumn(name = "skil_id"),

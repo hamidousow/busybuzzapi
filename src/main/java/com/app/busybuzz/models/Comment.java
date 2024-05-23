@@ -31,7 +31,7 @@ public class Comment {
     Enterprise enterprise;
 
     @JoinColumn(name = "per_id")
-    @ManyToOne(targetEntity = Person.class)
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.EAGER)
     Person person;
 
 }

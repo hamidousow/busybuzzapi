@@ -53,5 +53,13 @@ public class Enterprise {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "enterprise", cascade = CascadeType.REMOVE)
     List<Comment> comment;
 
+    public Enterprise() {
 
+    }
+
+    public Enterprise(String name, int siren, String phoneNumber) {
+        this.name = name;
+        this.siren = siren;
+        this.phoneNumber = phoneNumber;
+    }
 }

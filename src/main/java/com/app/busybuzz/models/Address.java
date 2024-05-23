@@ -38,5 +38,15 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Establishment establishment;
 
+    public Address() {
+    }
 
+    public Address(String number, String streetName, String city, String zipCode, Enterprise enterprise) {
+        this.number = number;
+        this.streetName = streetName;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.optionalInfo = optionalInfo;
+        this.enterprise = enterprise;
+    }
 }

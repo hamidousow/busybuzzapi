@@ -20,6 +20,6 @@ public class Skill {
     @Column(name ="skil_name")
     String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "skills")
-    List<Person> personList;
+    /*@ManyToMany(fetch = FetchType.LAZY, mappedBy = "skills")
+    List<Person> personList;*/
 }
