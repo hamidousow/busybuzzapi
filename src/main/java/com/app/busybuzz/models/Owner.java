@@ -1,7 +1,8 @@
 package com.app.busybuzz.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @DiscriminatorValue("owner")
 public class Owner extends Person {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "t_asso_enterprise_owner",
             joinColumns = @JoinColumn(name = "per_id"),
@@ -19,17 +20,29 @@ public class Owner extends Person {
     )
     private List<Enterprise> enterprises;
 
-    public Owner() { }
+    public Owner() {}
 
-    public Owner(String name, String lastName, String mail) {
-        super(name, lastName, mail);
+    public Owner(String name, String lastname, String mail, String role) {
+        super(name, lastname, mail, role);
     }
 
-    public void addEnterprise(Enterprise enterprise) {
-        this.enterprises.add(enterprise);
+    public Owner(String name,
+                 String lastname,
+                 String mail,
+                 String role,
+                 String position,
+                 List<Comment> comments,
+                 List<Skill> skills,
+                 List<Enterprise> enterprises) {
+        super(name, lastname, mail, role, position, comments, skills);
+        this.enterprises = enterprises;
     }
 
+    public List<Enterprise> getEnterprises() {
+        return enterprises;
+    }
 
-
-
+    public void setEnterprises(List<Enterprise> enterprises) {
+        this.enterprises = enterprises;
+    }
 }

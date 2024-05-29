@@ -34,7 +34,7 @@ public class Establishment {
     @JoinColumn(name = "addr_id", referencedColumnName = "addr_id")
     private Address address;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="ent_id")
     private Enterprise enterprise;
 }

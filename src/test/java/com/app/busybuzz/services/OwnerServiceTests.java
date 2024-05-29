@@ -32,9 +32,11 @@ public class OwnerServiceTests {
     @Test
     @Order(1)
     public void shouldCreateUserWithRoleOwner() {
-        Owner owner = new Owner("test", "create", "test6@createmethod.com");
+        Owner owner = new Owner();
+        owner.setName("test");
+        owner.setLastName("create");
+        owner.setMail("test78@createmethod.com");
         owner.setRole(Roles.OWNER);
-        owner.setId(1);
         ownerService.create(owner);
         verify(ownerRepoMock, times(1)).save(owner);
     }
@@ -42,7 +44,11 @@ public class OwnerServiceTests {
     @Test
     @Order(2)
     public void searchUserByMail_shouldReturnOneUser() {
-        Owner owner = new Owner("Name", "Lastname", "la@mail");
+        Owner owner = new Owner();
+        owner.setName("test");
+        owner.setLastName("create");
+        owner.setMail("test78@createmethod.com");
+        owner.setRole(Roles.OWNER);
         given(ownerRepoMock.findOneByMail(owner.getMail()))
                 .willReturn(Optional.of(owner));
         var ownerResult = ownerService.findOneByMail(owner.getMail());
@@ -52,7 +58,11 @@ public class OwnerServiceTests {
     @Test
     @Order(3)
     public void shouldUpdateUserData() {
-        Owner owner = new Owner("name", "lastname", "mail@gmail.com");
+        Owner owner = new Owner();
+        owner.setName("test");
+        owner.setLastName("create");
+        owner.setMail("test78@createmethod.com");
+        owner.setRole(Roles.OWNER);
         ownerService.create(owner);
         owner.setName("udpateTest");
         ownerService.update(owner);
@@ -62,8 +72,9 @@ public class OwnerServiceTests {
     @Test
     @Order(4)
     public void shouldReturnListOfUsers() {
-        Owner owner = new Owner("name", "lastname", "mail@gmail.com");
-        Owner owner2 = new Owner("name1", "lastname2", "mail3@gmail.com");
+        Owner owner = new Owner("owner", "create1", "test78@createmethod.com", Roles.OWNER);
+        Owner owner2 = new Owner("owner2", "create2", "test782@createmethod.com", Roles.OWNER );
+
         List<Owner> owners = new ArrayList<Owner>(){{
             add(owner);
             add(owner2);
@@ -75,8 +86,11 @@ public class OwnerServiceTests {
     @Test
     @Order(5)
     public void testSearchUserById_shouldReturnOneUser() {
-        Owner owner = new Owner("test", "create", "test6@createmethod.com");
-        owner.setId(1);
+        Owner owner = new Owner();
+        owner.setName("test");
+        owner.setLastName("create");
+        owner.setMail("test78@createmethod.com");
+        owner.setRole(Roles.OWNER);
         given(ownerService.findOneById(1)).willReturn(Optional.of(owner));
     }
 
@@ -84,8 +98,11 @@ public class OwnerServiceTests {
     @Order(6)
     public void shouldDeleteUser() {
 
-        Owner owner = new Owner("test", "create", "test6@createmethod.com");
-        owner.setId(1);
+        Owner owner = new Owner();
+        owner.setName("test");
+        owner.setLastName("create");
+        owner.setMail("test78@createmethod.com");
+        owner.setRole(Roles.OWNER);
         ownerService.delete(owner);
         verify(ownerRepoMock, times(1)).delete(owner);
     }

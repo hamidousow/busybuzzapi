@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 @Setter
 @Getter
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "t_address")
 public class Address {
 
@@ -33,20 +36,7 @@ public class Address {
     private String optionalInfo;
 
     @OneToOne(mappedBy = "address")
-    private Enterprise enterprise;
-
-    @OneToOne(mappedBy = "address")
     private Establishment establishment;
 
-    public Address() {
-    }
 
-    public Address(String number, String streetName, String city, String zipCode, Enterprise enterprise) {
-        this.number = number;
-        this.streetName = streetName;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.optionalInfo = optionalInfo;
-        this.enterprise = enterprise;
-    }
 }

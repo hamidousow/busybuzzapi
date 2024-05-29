@@ -35,7 +35,6 @@ public class AddressServiceTests {
         address.setStreetName("rue du test adress");
         address.setCity("Croix");
         address.setZipCode("59000");
-        address.setEnterprise(enterprise.get());
 
         addressService.save(address);
         Optional<Address> result = addressService.findOneById(address.getId());

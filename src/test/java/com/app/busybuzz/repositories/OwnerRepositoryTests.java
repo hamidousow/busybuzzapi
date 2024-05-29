@@ -31,20 +31,19 @@ import static org.mockito.Mockito.verify;
 public class OwnerRepositoryTests {
 
     @Autowired
-    private OwnerRepository ownerRepo ;
+    private OwnerRepository ownerRepo;
 
     //todo: call before each to delete data in owner table
+    @AfterEach
+    public void resetTable() {
+        ownerRepo.deleteAll();
+    }
 
 
     @Test
     @Order(1)
     public void ownerRepository_shouldCreateOwner_returnSavedOwner() {
-        Owner owner = new Owner("test", "create", "test6@createmethod.com");
-        owner.setRole(Roles.OWNER);
-        /*Enterprise enterprise = new Enterprise("enterprise", 12345, "0320250423");
-        Address address = new Address("2", "Marceau", "Tourcoing", "59200",  enterprise);
-        enterprise.setAddress(address);
-        owner.addEnterprise(enterprise);*/
+        Owner owner = new Owner("owner", "create1", "test78@createmethod.com", Roles.OWNER);
 
         ownerRepo.save(owner);
 
@@ -55,7 +54,8 @@ public class OwnerRepositoryTests {
     @Test
     @Order(2)
     public void ownerRepository_testSearchUserByMail_shouldReturnOneUser() {
-        Owner owner = new Owner("Name", "Lastname", "la1235@mail");
+        Owner owner = new Owner("owner", "create1", "test78@createmethod.com", Roles.OWNER);
+
         ownerRepo.save(owner);
 
         Optional<Owner> ownerFind = ownerRepo.findOneByMail(owner.getMail());
@@ -67,7 +67,8 @@ public class OwnerRepositoryTests {
     @Test
     @Order(3)
     public void ownerRepository_shouldUpdateUserData() {
-        Owner owner = new Owner("name", "lastname", "mail2368@gmail.com");
+        Owner owner = new Owner("owner", "create1", "test78@createmethod.com", Roles.OWNER);
+
         ownerRepo.save(owner);
 
         Optional<Owner> ownerUpdated = ownerRepo.findById(owner.getId());
@@ -99,7 +100,8 @@ public class OwnerRepositoryTests {
     @Order(6)
     public void ownerRepository_testDeleteOwner_shouldDeleteUser() {
 
-        Owner owner = new Owner("test", "create", "test6594959@createmethod.com");
+        Owner owner = new Owner("owner", "create1", "test78@createmethod.com", Roles.OWNER);
+
         ownerRepo.save(owner);
 
         ownerRepo.delete(owner);

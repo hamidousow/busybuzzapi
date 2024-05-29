@@ -27,7 +27,7 @@ public class Comment {
     String text;
 
     @JoinColumn(name = "ent_id")
-    @ManyToOne(targetEntity = Enterprise.class)
+    @ManyToOne(targetEntity = Enterprise.class, fetch = FetchType.EAGER)
     Enterprise enterprise;
 
     @JoinColumn(name = "per_id")
