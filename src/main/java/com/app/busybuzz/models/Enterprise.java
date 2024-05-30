@@ -31,7 +31,7 @@ public class Enterprise {
     @Column(name = "ent_phone_number")
     private String phoneNumber;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinTable(
             name = "t_asso_enterprise_owner",
             joinColumns = @JoinColumn(name = "ent_id"),
@@ -55,11 +55,27 @@ public class Enterprise {
     public Enterprise() {
     }
 
+    public Enterprise(String name, int siren, String phoneNumber, List<Owner> owners) {
+        this.name = name;
+        this.siren = siren;
+        this.owners = owners;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Enterprise(String name, int siren, Integer voteScore, String phoneNumber) {
         this.name = name;
         this.siren = siren;
         this.voteScore = voteScore;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Enterprise(String name, int siren, String phoneNumber, Address address, List<Owner> owners) {
+        this.name = name;
+        this.siren = siren;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.owners = owners;
+
     }
 
     public Integer getId() {

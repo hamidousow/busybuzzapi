@@ -63,13 +63,7 @@ public class EnterpriseRepositoryTests {
 
     @BeforeEach
     public void initObjects() {
-        address = Address.builder()
-                .number("27")
-                .streetName("rue de la Latte")
-                .city("Tourcoing")
-                .zipCode("59200")
-                .build();
-
+        address = new Address("27", "rue de la Latte", "Tourcoing", "59200");
         owner = new Owner("Ha","Mas","mail@gmail.com", Roles.OWNER);
 
         owners = new ArrayList<>(){{

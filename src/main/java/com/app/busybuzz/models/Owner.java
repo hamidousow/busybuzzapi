@@ -12,7 +12,7 @@ import java.util.List;
 @DiscriminatorValue("owner")
 public class Owner extends Person {
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinTable(
             name = "t_asso_enterprise_owner",
             joinColumns = @JoinColumn(name = "per_id"),
