@@ -28,7 +28,10 @@ public class EmployeeServiceTests {
     @Test
     @Order(1)
     public void shouldCreateNewEmployee() {
-        Employee employee = new Employee("emp", "first", "employee2@createmethod.com");
+        Employee employee = new Employee();
+        employee.setName("emp");
+        employee.setLastName("first");
+        employee.setMail("employee31@createmethod.com");
         employee.setRole(Roles.EMPLOYEE);
 
         employee.setEnterprise(enterpriseService.findOneById(301).get());
@@ -71,10 +74,9 @@ public class EmployeeServiceTests {
     @Test
     @Order(5)
     public void testSearchEmployeeByEmail_shouldReturnOneUser() {
-        Optional<Employee> result = employeeService.findOneByMail("employee1@createmethod.com");
+        Optional<Employee> result = employeeService.findOneByMail("employee2@createmethod.com");
         assertNotNull(result.get());
-        assertEquals("employee1@createmethod.com", result.get().getMail());
-
+        assertEquals("employee2@createmethod.com", result.get().getMail());
     }
 
     @Test

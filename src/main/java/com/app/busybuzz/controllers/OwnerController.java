@@ -24,13 +24,8 @@ public class OwnerController {
             @RequestParam("lastname") String lastname,
             @RequestParam("mail") String mail
     ) {
-        Owner owner = new Owner(name, lastname, mail);
-        ownerService.create(owner);
-        Optional<Owner> ownerFind = ownerService.findOneById(owner.getId());
-        if(ownerFind.isEmpty()) {
-            return ResponseEntity.ok("Fail subscription.");
-        }
-        return ResponseEntity.ok("User created successful");
+
+        return ResponseEntity.ok("Hello World");
     }
 
 }

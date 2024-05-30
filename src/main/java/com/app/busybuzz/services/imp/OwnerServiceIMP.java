@@ -11,8 +11,12 @@ import java.util.Optional;
 
 public class OwnerServiceIMP implements IOwnerService {
 
-    @Autowired
     private OwnerRepository ownerRepository;
+
+
+    public OwnerServiceIMP(OwnerRepository ownerRepository) {
+        this.ownerRepository = ownerRepository;
+    }
 
     @Override
     public void create(Owner owner) {

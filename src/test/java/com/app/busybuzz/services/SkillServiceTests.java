@@ -1,15 +1,11 @@
 package com.app.busybuzz.services;
 
-import com.app.busybuzz.models.Comment;
-import com.app.busybuzz.models.Enterprise;
-import com.app.busybuzz.models.Person;
+
 import com.app.busybuzz.models.Skill;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.Instant;
-import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -13,8 +13,12 @@ import java.util.Set;
 @Service
 public class SkillServiceIMP implements ISkillService {
 
-    @Autowired
+
     SkillRepository skillRepository;
+
+    public SkillServiceIMP(SkillRepository skillRepository) {
+        this.skillRepository = skillRepository;
+    }
 
     @Override
     public void create(Skill skill) {

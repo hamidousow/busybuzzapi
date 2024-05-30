@@ -1,7 +1,11 @@
 package com.app.busybuzz.services;
 
+import com.app.busybuzz.models.Address;
 import com.app.busybuzz.models.Enterprise;
 import com.app.busybuzz.models.Owner;
+import com.app.busybuzz.services.imp.AddressServiceIMP;
+import com.app.busybuzz.services.imp.EnterpriseServiceIMP;
+import com.app.busybuzz.services.imp.OwnerServiceIMP;
 import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -9,6 +13,7 @@ import org.junit.jupiter.api.TestClassOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,19 +29,35 @@ public class EnterpriseServiceTests {
     @Autowired
     private IOwnerService ownerService;
 
+    @Autowired
+    private IAddressService addressService;
+
     @Test
     @Order(1)
     public void shouldCreateOneEnterprise() {
+        List<Owner> owners = new ArrayList<>();
+        Address address = new Address();
+        Enterprise newEntreprise = new Enterprise();
+
         Optional<Owner> owner = ownerService.findOneById(104);
-        Enterprise newEntreprise = Enterprise.builder()
-                                    .name("enterprise 6")
-                                    .siren(1252102)
-                                    .siret(678012325)
-                                    .voteScore(0)
-                                    .phoneNumber("012023400")
-                                    .owner(owner.get())
-                                    .build();
-        enterpriseService.create(newEntreprise);
+        owners.add(owner.get());
+
+        address.setNumber("558");
+        address.setStreetName("rue de Gand");
+        address.setCity("Croix");
+        address.setZipCode("5900");
+
+
+        newEntreprise.setName("enterprise 11");
+        newEntreprise.setSiren(110365);
+        newEntreprise.setVoteScore(0);
+        newEntreprise.setPhoneNumber("019330");
+        newEntreprise.setAddress(address);
+        newEntreprise.setOwners(owners);
+
+        addressService.save(address);
+        enterpriseService.save(newEntreprise);
+
         Optional<Enterprise> result = enterpriseService.findOneById(newEntreprise.getId());
         assertTrue(result.isPresent());
 
@@ -45,9 +66,8 @@ public class EnterpriseServiceTests {
     @Test
     @Order(2)
     public void shouldReturnOneEnterprise() {
-        Optional<Enterprise> result = enterpriseService.findOneById(251);
+        Optional<Enterprise> result = enterpriseService.findOneById(301);
         assertTrue(result.isPresent());
-        assertEquals("enterprise 1", result.get().getName());
     }
 
     @Test

@@ -11,8 +11,11 @@ import java.util.Optional;
 @Service
 public class CommentServiceIMP implements ICommentService {
 
-    @Autowired
     CommentRepository commentRepository;
+
+    public CommentServiceIMP(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+    }
 
     @Override
     public void create(Comment comment) {

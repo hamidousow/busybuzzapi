@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
+
 public class AddressServiceIMP implements IAddressService {
 
-    @Autowired
     AddressRepository addressRepository;
 
+    public AddressServiceIMP(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
+    }
 
     @Override
     public void save(Address address) {

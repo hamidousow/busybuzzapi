@@ -12,8 +12,11 @@ import java.util.Optional;
 @Service
 public class EmployeeServiceIMP implements IEmployeeService {
 
-    @Autowired
     EmployeeRepository employeeRepository;
+
+    public EmployeeServiceIMP(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     public void create(Employee employee) {
         employeeRepository.save(employee);
