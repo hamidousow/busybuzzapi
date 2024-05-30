@@ -59,29 +59,8 @@ public class OwnerRepositoryTests {
     @Order(1)
     public void ownerRepository_shouldCreateOwner_returnSavedOwner() {
         Owner owner2 = new Owner("owner2", "hello2", "test8569652@createmethod.com", Roles.OWNER);
-        Owner owner3 = new Owner("owner3", "create3", "test3@createmethod.com", Roles.OWNER);
-        Owner owner4 = new Owner("owner4", "create4", "test4@createmethod.com", Roles.OWNER);
-        Address address = new Address("27", "rue de la Latte", "Tourcoing", "59200");
 
-        List<Owner> owners = new ArrayList<>(){{
-            add(owner2);
-            add(owner3);
-            add(owner4);
-        }};
-
-        Enterprise enterprise = new Enterprise(
-                "enterprise2",
-                145598,
-                "0320423",
-                address,
-                owners
-        );
-
-        addressRepository.save(address);
-        ownerRepo.saveAll(owners);
-        enterpriseRepository.save(enterprise);
-        //ownerRepo.addEnterprise(enterprise);
-
+        ownerRepo.save(owner2);
 
         assertThat(owner2).isNotNull();
         assertThat(owner2.getId()).isGreaterThan(0);
