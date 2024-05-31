@@ -40,6 +40,13 @@ public class Establishment {
     public Establishment() {
     }
 
+    public Establishment(String mainActivity, String siret, Address address, Enterprise enterprise) {
+        this.mainActivity = mainActivity;
+        this.siret = siret;
+        this.address = address;
+        this.enterprise = enterprise;
+    }
+
     public Establishment(String mainActivity, String dateCreated, String dateActivityStarted, String dateClosed, String siret, Address address) {
         this.mainActivity = mainActivity;
         this.dateCreated = dateCreated;
