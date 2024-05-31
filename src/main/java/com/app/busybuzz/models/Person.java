@@ -68,6 +68,12 @@ public class Person {
         this.skills = skills;
     }
 
+    public Person(String firstname, String lastname, String mail) {
+        this.name = firstname;
+        this.lastName = lastname;
+        this.mail = mail;
+    }
+
     public Integer getId() {
         return id;
     }

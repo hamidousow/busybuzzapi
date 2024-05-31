@@ -22,8 +22,7 @@ public class AppClient extends Person {
     public AppClient(
                      String name,
                      String lastname,
-                     String mail,
-                     String role) {
-        super(name, lastname, mail, role);
+                     String mail) {
+        super(name, lastname, mail);
     }
 }
