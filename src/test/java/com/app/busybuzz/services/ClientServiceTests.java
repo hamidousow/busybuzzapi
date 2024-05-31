@@ -1,8 +1,7 @@
 package com.app.busybuzz.services;
 
 import com.app.busybuzz.constantes.Roles;
-import com.app.busybuzz.models.Client;
-import com.app.busybuzz.models.Owner;
+import com.app.busybuzz.models.AppClient;
 import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ public class ClientServiceTests {
     @Test
     @Order(1)
     public void shouldCreateOneClient() {
-        Client client = new Client();
+        AppClient client = new AppClient();
         client.setName("client");
         client.setLastName("Test");
         client.setMail("client2@gmail.com");
@@ -38,7 +37,7 @@ public class ClientServiceTests {
     @Order(2)
     public void shouldReturnOneClient() {
         Integer expectedId = 119;
-        Optional<Client> userFind = clientService.findOneById(expectedId);
+        Optional<AppClient> userFind = clientService.findOneById(expectedId);
         assertNotNull(userFind);
         assertEquals(expectedId, userFind.get().getId());
     }
@@ -47,10 +46,10 @@ public class ClientServiceTests {
     @Order(3)
     public void shouldUpdateClientData() {
         Integer userId = 119;
-        Optional<Client> userToUpdate = clientService.findOneById(userId);
+        Optional<AppClient> userToUpdate = clientService.findOneById(userId);
         userToUpdate.get().setName("udpate");
         clientService.save(userToUpdate.get());
-        Optional<Client> result = clientService.findOneById(userId);
+        Optional<AppClient> result = clientService.findOneById(userId);
         assertNotNull(result);
         assertEquals("udpate" , result.get().getName());
     }
@@ -58,14 +57,14 @@ public class ClientServiceTests {
     @Test
     @Order(4)
     public void shouldReturnListOfClients() {
-        List<Client> results = clientService.findAll();
+        List<AppClient> results = clientService.findAll();
         assertFalse(results.isEmpty());
     }
 
     @Test
     @Order(5)
     public void testSearchClientByEmail_shouldReturnOneClient() {
-        Optional<Client> result = clientService.findOneByMail("client2@gmail.com");
+        Optional<AppClient> result = clientService.findOneByMail("client2@gmail.com");
         assertNotNull(result.get());
         assertEquals("client2@gmail.com", result.get().getMail());
 
@@ -75,9 +74,9 @@ public class ClientServiceTests {
     @Order(6)
     public void shouldDeleteOneClient() {
         Integer id = 119;
-        Optional<Client> userToDelete = clientService.findOneById(id);
+        Optional<AppClient> userToDelete = clientService.findOneById(id);
         clientService.delete(userToDelete.get());
-        Optional<Client> result = clientService.findOneById(id);
+        Optional<AppClient> result = clientService.findOneById(id);
         assertFalse(result.isPresent());
     }
 }

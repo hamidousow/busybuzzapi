@@ -75,7 +75,6 @@ public class Enterprise {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.owners = owners;
-
     }
 
     public Integer getId() {

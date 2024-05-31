@@ -7,10 +7,6 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Entity
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "t_comment")
 public class Comment {
 
@@ -34,4 +30,49 @@ public class Comment {
     @ManyToOne(targetEntity = Person.class, fetch = FetchType.EAGER)
     Person person;
 
+    public Comment() {
+    }
+
+    public Comment(Date creationDate, String text, Enterprise enterprise, Person person) {
+        this.creationDate = creationDate;
+        this.text = text;
+        this.enterprise = enterprise;
+        this.person = person;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 }

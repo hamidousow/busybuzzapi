@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name = "t_skill")
 public class Skill {
 
@@ -22,4 +21,23 @@ public class Skill {
 
     /*@ManyToMany(fetch = FetchType.LAZY, mappedBy = "skills")
     List<Person> personList;*/
+
+    public Skill() {
+    }
+
+    public Skill(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

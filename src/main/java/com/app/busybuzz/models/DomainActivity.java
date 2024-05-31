@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Data
 @Table(name = "t_domain_activity")
 public class DomainActivity {
 
@@ -16,4 +15,23 @@ public class DomainActivity {
 
     @Column(name = "dom_name")
     String name;
+
+    public DomainActivity() {
+    }
+
+    public DomainActivity(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

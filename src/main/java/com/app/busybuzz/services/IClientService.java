@@ -1,7 +1,6 @@
 package com.app.busybuzz.services;
 
-import com.app.busybuzz.models.Client;
-import com.app.busybuzz.models.Owner;
+import com.app.busybuzz.models.AppClient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,13 +9,13 @@ import java.util.Optional;
 @Service
 public interface IClientService {
 
-    Optional<Client> findOneById(Integer id);
+    Optional<AppClient> findOneById(Integer id);
 
-    void save(Client client);
+    void save(AppClient client);
 
-    List<Client> findAll();
+    List<AppClient> findAll();
 
-    void delete(Client client);
+    void delete(AppClient client);
 
-    Optional<Client> findOneByMail(String mail);
+    Optional<AppClient> findOneByMail(String mail);
 }
