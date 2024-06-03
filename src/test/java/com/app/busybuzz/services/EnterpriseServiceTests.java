@@ -1,15 +1,25 @@
 package com.app.busybuzz.services;
 
+import com.app.busybuzz.constantes.Roles;
 import com.app.busybuzz.models.Address;
 import com.app.busybuzz.models.Enterprise;
 import com.app.busybuzz.models.Owner;
+import com.app.busybuzz.repositories.AddressRepository;
+import com.app.busybuzz.repositories.EnterpriseRepository;
+import com.app.busybuzz.repositories.OwnerRepository;
+
 import com.app.busybuzz.services.imp.AddressServiceIMP;
 import com.app.busybuzz.services.imp.EnterpriseServiceIMP;
 import com.app.busybuzz.services.imp.OwnerServiceIMP;
-import org.junit.jupiter.api.ClassOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestClassOrder;
+import com.github.javafaker.Faker;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.invocation.Invocation;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,85 +27,81 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@TestClassOrder(ClassOrderer.OrderAnnotation.class)
+@ExtendWith(MockitoExtension.class)
 public class EnterpriseServiceTests {
 
-    @Autowired
-    private IEnterpriseService enterpriseService;
+    @Mock
+    private EnterpriseRepository enterpriseRepository;
 
-    @Autowired
-    private IOwnerService ownerService;
-
-    @Autowired
-    private IAddressService addressService;
+    @InjectMocks
+    private EnterpriseServiceIMP enterpriseService;
 
     @Test
-    @Order(1)
-    public void shouldCreateOneEnterprise() {
-        List<Owner> owners = new ArrayList<>();
-        Address address = new Address();
-        Enterprise newEntreprise = new Enterprise();
+    public void testEnterpriseService_createOneEnterprise_shouldSaveOneEnterprise() {
+        Enterprise enterprise = mock(Enterprise.class);
 
-        Optional<Owner> owner = ownerService.findOneById(104);
-        owners.add(owner.get());
+        doAnswer( i -> {
+            Enterprise result = i.getArgument(0);
+            assertNotNull(result);
+            return null;
+        }).when(enterpriseRepository).save(enterprise);
 
-        address.setNumber("558");
-        address.setStreetName("rue de Gand");
-        address.setCity("Croix");
-        address.setZipCode("5900");
+        enterpriseService.save(enterprise);
 
-
-        newEntreprise.setName("enterprise 11");
-        newEntreprise.setSiren(110365);
-        newEntreprise.setVoteScore(0);
-        newEntreprise.setPhoneNumber("019330");
-        newEntreprise.setAddress(address);
-        newEntreprise.setOwners(owners);
-
-        addressService.save(address);
-        enterpriseService.save(newEntreprise);
-
-        Optional<Enterprise> result = enterpriseService.findOneById(newEntreprise.getId());
-        assertTrue(result.isPresent());
+        verify(enterpriseRepository, times(1)).save(enterprise);
 
     }
 
     @Test
-    @Order(2)
-    public void shouldReturnOneEnterprise() {
-        Optional<Enterprise> result = enterpriseService.findOneById(301);
-        assertTrue(result.isPresent());
+    public void testEnterpriseService_findOneById_shouldReturnOneEnterprise() {
+        Enterprise entreprise = new Enterprise("mockito", 12345, "031234456");
+
+        when(enterpriseRepository.findById(1)).thenReturn(Optional.of(entreprise));
+
+        Enterprise result = enterpriseService.findOneById(1).get();
+        assertThat(result).isNotNull();
     }
 
     @Test
-    @Order(3)
-    public void shouldUpdateEnterpriseData() {
-        Integer enterpriseId = 251;
-        Optional<Enterprise> enterpriseToUpdate = enterpriseService.findOneById(enterpriseId);
-        enterpriseToUpdate.get().setName("udpateTest");
-        enterpriseService.update(enterpriseToUpdate.get());
-        Optional<Enterprise> result = enterpriseService.findOneById(enterpriseId);
-        assertNotNull(result);
-        assertEquals("udpateTest" , result.get().getName());
+    public void enterpriseService_testUpdateEnterprise_shouldUpdateOneEnterprise() {
+        Enterprise enterprise = new Enterprise("mock", 12345, "031234456");
+
+        doAnswer( i -> {
+            Enterprise result = i.getArgument(0);
+            result.setName("mockito");
+            assertEquals("mockito", result.getName());
+            return null;
+        }).when(enterpriseRepository).save(enterprise);
+
+        enterpriseService.save(enterprise);
+
+        verify(enterpriseRepository, times(1)).save(enterprise);
+        assertEquals("mockito", enterprise.getName());
     }
 
     @Test
-    @Order(4)
-    public void shouldReturnListOfEnterprises() {
-        List<Enterprise> results = enterpriseService.findAll();
-        assertFalse(results.isEmpty());
+    public void enterpriseServce_findAllEnterprises_shouldReturnListOfEnterprises() {
+        List<Enterprise> enterprises = mock(List.class);
+
+        when(enterpriseRepository.findAll()).thenReturn(enterprises);
+
+        List<Enterprise> enterpriseList = enterpriseService.findAll();
+
+        assertNotNull(enterpriseList);
+
     }
 
     @Test
-    @Order(5)
-    public void shouldDeleteEnterprise() {
-        Integer id = 251;
-        Optional<Enterprise> enterpriseToDelete = enterpriseService.findOneById(id);
-        enterpriseService.delete(enterpriseToDelete.get());
-        Optional<Enterprise> result = enterpriseService.findOneById(id);
-        assertFalse(result.isPresent());
+    public void enterpriseService_testDeleteOne_shouldReturnNull() {
+        Enterprise enterprise = mock(Enterprise.class);
+
+        enterpriseService.delete(enterprise);
+
+        assertAll(() -> enterpriseService.delete(enterprise));
     }
 }

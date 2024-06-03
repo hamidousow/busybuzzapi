@@ -1,7 +1,6 @@
 package com.app.busybuzz.services;
 
 import com.app.busybuzz.models.Enterprise;
-import com.app.busybuzz.models.Owner;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -68,6 +68,14 @@ public class Enterprise {
         this.voteScore = voteScore;
         this.phoneNumber = phoneNumber;
     }
+    public Enterprise(String name, int siren, String phoneNumber) {
+        this.name = name;
+        this.siren = siren;
+        this.phoneNumber = phoneNumber;
+    }
+
+
+
 
     public Enterprise(String name, int siren, String phoneNumber, Address address, List<Owner> owners) {
         this.name = name;
@@ -76,6 +84,8 @@ public class Enterprise {
         this.address = address;
         this.owners = owners;
     }
+
+
 
     public Integer getId() {
         return id;
